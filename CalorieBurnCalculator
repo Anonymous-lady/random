@@ -1,0 +1,72 @@
+import java.util.Scanner;
+
+public class CalorieBurnCalculator {
+    public static void main(String[] args) {
+        Scanner kb = new Scanner(System.in);
+        double weight, metValue, duration, caloriesBurned;
+        String response;
+
+        // get user weight
+        // get exercise type and duration
+        do{
+            System.out.println("Enter your weight in kilograms: ");
+            weight = kb.nextDouble();
+            displayExerciseTypes();
+            System.out.println("\nEnter the exercise (A-E) and duration in minutes:");
+            String exerciseType = kb.next();
+            metValue = getMET(exerciseType);
+            duration = kb.nextDouble();
+            caloriesBurned = calculateCaloriesBurned(weight, metValue, duration);
+            displayInformation(caloriesBurned);
+            System.out.println("\nDo you want to calculate another? (yes/no)");
+            response = kb.next();
+            System.out.println();
+        }
+        while(response.equals("yes"));
+        System.out.println("Goodbye!");
+    }
+        
+    // display exercise type
+    public static void displayExerciseTypes(){
+        System.out.println("\nTypes of exercise:");
+        System.out.println("[A] Running");
+        System.out.println("[B] Cycling");
+        System.out.println("[C] Swimming");
+        System.out.println("[D] Walking");
+        System.out.println("[E] Yoga");
+    }
+    
+    //  Look up MET value 
+    public static double getMET(String exercise){
+        double metValue;
+        switch(exercise){
+            case "a":
+            case "A": metValue = 9.8;
+                break;
+            case "b":
+            case "B": metValue = 7.5;
+                break;
+            case "c":
+            case "C": metValue = 6.0;
+                break;
+            case "d":
+            case "D":  metValue = 3.8;
+                break;
+            case "e":
+            case "E": metValue = 2.5; 
+                break;
+            default: metValue = 0;
+        }
+        return metValue;
+    }
+    
+    // calculate calories burned
+    public static double calculateCaloriesBurned(double weight, double metValue, double duration){
+        double caloriesBurned = (weight * metValue * duration) / 60;
+        return caloriesBurned;
+    }
+    
+    public static void displayInformation(double caloriesBurned){
+        System.out.println("\nCalories burned during this exercise: " + caloriesBurned);
+    }
+}
