@@ -1,7 +1,4 @@
-/**
- * Esther Akinpelu
- * 3195119
- */
+
 import java.util.Random;
 import java.util.Scanner;
 public class CreatureBattle
